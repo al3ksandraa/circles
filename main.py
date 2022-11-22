@@ -1,14 +1,15 @@
 import sys
 import random
-from PyQt5 import uic
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5.QtGui import QColor, QPainter
+from UI import Ui_MainWindow
 
 
-class MyWidget(QMainWindow):
+class MyWidget(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi('UI.ui', self)
+        self.setupUi(self)
+        self.setWindowTitle('Случайные окружности')
 
         self.do_paint = False
         self.btn.clicked.connect(self.paint)
@@ -28,7 +29,10 @@ class MyWidget(QMainWindow):
 
     def draw(self):
         size = random.randrange(10, 150)
-        self.qp.setBrush(QColor(255, 255, 0))
+        r = random.randrange(0, 255)
+        g = random.randrange(0, 255)
+        b = random.randrange(0, 255)
+        self.qp.setBrush(QColor(r, g, b))
         x = random.randrange(50, 750)
         y = random.randrange(50, 550)
 
